@@ -91,7 +91,7 @@ return {
     })
 
     -- Language server for Typescript
-    lspconfig.tsserver.setup({
+    lspconfig.ts_ls.setup({
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         require("twoslash-queries").attach(client, bufnr)
@@ -161,48 +161,48 @@ return {
     -- group :development do
     --   gem "ruby-lsp", require: false
     -- end
-    lspconfig.ruby_lsp.setup({
-      mason = false,
-      cmd = { os.getenv("GEM_HOME") .. "/bin/ruby-lsp" },
-      capabilities = capabilities,
-      on_attach = function(client, buffer)
-        vim.api.nvim_buf_create_user_command(buffer, "ShowRubyDeps", function(opts)
-            local params = vim.lsp.util.make_text_document_params()
-            local showAll = opts.args == "all"
+    -- lspconfig.ruby_lsp.setup({
+    --   mason = false,
+    --   cmd = { os.getenv("GEM_HOME") .. "/bin/ruby-lsp" },
+    --   capabilities = capabilities,
+    --   on_attach = function(client, buffer)
+    --     vim.api.nvim_buf_create_user_command(buffer, "ShowRubyDeps", function(opts)
+    --         local params = vim.lsp.util.make_text_document_params()
+    --         local showAll = opts.args == "all"
 
-            client.request("rubyLsp/workspace/dependencies", params, function(error, result)
-              if error then
-                print("Error showing deps: " .. error)
-                return
-              end
+    --         client.request("rubyLsp/workspace/dependencies", params, function(error, result)
+    --           if error then
+    --             print("Error showing deps: " .. error)
+    --             return
+    --           end
 
-              local qf_list = {}
-              for _, item in ipairs(result) do
-                if showAll or item.dependency then
-                  table.insert(qf_list, {
-                    text = string.format("%s (%s) - %s", item.name, item.version, item.dependency),
-                    filename = item.path
-                  })
-                end
-              end
+    --           local qf_list = {}
+    --           for _, item in ipairs(result) do
+    --             if showAll or item.dependency then
+    --               table.insert(qf_list, {
+    --                 text = string.format("%s (%s) - %s", item.name, item.version, item.dependency),
+    --                 filename = item.path
+    --               })
+    --             end
+    --           end
 
-              vim.fn.setqflist(qf_list)
-              vim.cmd('copen')
-            end, buffer)
-          end,
-          { nargs = "?", complete = function() return { "all" } end })
-      end,
-    })
+    --           vim.fn.setqflist(qf_list)
+    --           vim.cmd('copen')
+    --         end, buffer)
+    --       end,
+    --       { nargs = "?", complete = function() return { "all" } end })
+    --   end,
+    -- })
 
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "ruby",
-      callback = function()
-        vim.lsp.start {
-          name = "rubocop",
-          cmd = { "bundle", "exec", "rubocop", "--lsp" },
-        }
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   pattern = "ruby",
+    --   callback = function()
+    --     vim.lsp.start {
+    --       name = "rubocop",
+    --       cmd = { "bundle", "exec", "rubocop", "--lsp" },
+    --     }
+    --   end,
+    -- })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("galleon-lsp-attach", { clear = true }),
@@ -314,7 +314,7 @@ return {
     })
 
     vim.api.nvim_create_autocmd("BufEnter", {
-      pattern = { 'Fastfile', 'Appfile', 'Matchfile', 'Pluginfile' },
+      pattern = { 'Fastfile', 'Appfile', 'Matchfile', 'Pluginfile', 'Podfile' },
       callback = function()
         vim.o.filetype = "ruby"
       end,
