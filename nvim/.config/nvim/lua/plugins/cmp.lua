@@ -2,14 +2,13 @@
 -- https://github.com/hrsh7th/nvim-cmp
 return {
   'hrsh7th/nvim-cmp',
+  version = false,
   event = 'InsertEnter',
   dependencies = {
-    'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
-    'hrsh7th/nvim-cmp',
     {
       'L3MON4D3/LuaSnip',
       build = (function()
@@ -38,28 +37,12 @@ return {
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
-
-      -- For an understanding of why these mappings were
-      -- chosen, you will need to read `:help ins-completion`
-      --
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert({
-        -- Scroll the documentation window [b]ack / [f]orward
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-
-        -- Manually trigger a completion from nvim-cmp.
-        -- Generally you don't need this, because nvim-cmp will display
-        -- completions whenever it has completion options available.
-        ['<C-Space>'] = cmp.mapping.complete({}),
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        -- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },

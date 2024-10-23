@@ -59,6 +59,7 @@ return {
     })
 
     -- Language server for Swift and C/C++/Objective-C.
+    -- https://www.swift.org/documentation/articles/zero-to-swift-nvim.html
     lspconfig.sourcekit.setup({
       capabilities = {
         workspace = {
@@ -146,11 +147,6 @@ return {
       },
     })
 
-    -- Kotlin language server.
-    lspconfig.kotlin_language_server.setup({
-      capabilities = capabilities,
-    })
-
     -- Bash language server.
     lspconfig.bashls.setup({
       capabilities = capabilities
@@ -208,7 +204,7 @@ return {
       group = vim.api.nvim_create_augroup("galleon-lsp-attach", { clear = true }),
       callback = function(event)
         local nmap = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "[LSP]: " .. desc })
+          vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = event.buf, desc = "[LSP]: " .. desc })
         end
 
         -- Jump to the definition of the word under your cursor.

@@ -1,5 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
+  event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -27,7 +28,7 @@ return {
       defaults = {
         dynamic_preview_title = true,
         file_ignore_patterns = {
-          --[[ '.git', ]]
+          [[ '.git', ]],
           'node_modules',
           'vendor',
         },
@@ -54,10 +55,6 @@ return {
       })
     end
 
-    local function find_files()
-      builtin.find_files({ cwd = vim.fn.stdpath "config" })
-    end
-
     -- See `:help telescope.builtin`
     vim.keymap.set("n", "<leader>/", current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer" })
     vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
@@ -68,8 +65,8 @@ return {
     vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-    vim.keymap.set("n", "<leader>sn", find_files, { desc = "[S]earch [N]eovim files" })
     vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+    vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
     vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch Current [W]ord" })
   end,
 }
