@@ -2,9 +2,9 @@
 -- ~/.config/nvim
 -- ├── lua
 -- │   ├── config
--- │   │   ├── keymaps.lua - Keymap Config
--- │   │   ├── lazy.lua - lazy.nvim plugin manager
--- │   │   └── options.lua - NeoVim Config
+-- │   │   ├── keymaps.lua - Keymap Config for NeoVim
+-- │   │   ├── lazy.lua - Install lazy.nvim Plugin Manager
+-- │   │   └── options.lua - NeoVim General Config
 -- │   └── plugins
 -- │       └── <plugin>.lua
 -- ├── init.lua
