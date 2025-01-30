@@ -22,6 +22,7 @@ return {
         "diff",
         "dockerfile",
         "go",
+        "graphql",
         "groovy",
         "html",
         "java",

@@ -45,7 +45,6 @@ return {
 
     -- Enable telescope fzf native, if installed
     require("telescope").load_extension("fzf")
-    require("telescope").load_extension('harpoon')
     require("telescope").load_extension("ui-select")
 
     local function current_buffer_fuzzy_find()

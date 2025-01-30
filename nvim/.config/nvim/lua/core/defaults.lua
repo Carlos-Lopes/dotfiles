@@ -1,7 +1,7 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
@@ -67,7 +67,7 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 8
 
 -- Set indentation as two spaces
 vim.opt.shiftwidth = 2
@@ -85,9 +85,6 @@ vim.g.netrw_list_hide = ".bundle,.expo,.git,.idea,.vscode,node_modules,vendor"
 
 -- Set wrap guides
 vim.opt.colorcolumn = "80,120"
-
--- Set Wrap Guides color
-vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = "white", bg = "white" })
 
 -- Set background color as transparent
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

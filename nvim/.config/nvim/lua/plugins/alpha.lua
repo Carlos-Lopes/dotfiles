@@ -39,7 +39,7 @@ return {
       dashboard.button("f", " Search File", ":Telescope find_files<CR>"),
       dashboard.button("g", "󰱼 Search Word", ":Telescope live_grep<CR>"),
       dashboard.button("l", "󰒲 Extensions", ":Lazy<CR>"),
-      dashboard.button("q", " Quit", ":qa<CR>"),
+      dashboard.button("q", " Quit", ":q<CR>"),
     }
 
     alpha.setup(dashboard.opts)

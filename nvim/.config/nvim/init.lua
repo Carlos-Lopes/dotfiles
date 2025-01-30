@@ -1,18 +1,18 @@
 -- Project Config
 -- ~/.config/nvim
 -- ├── lua
--- │   ├── config
--- │   │   ├── keymaps.lua - Keymap Config for NeoVim
+-- │   ├── core
 -- │   │   ├── lazy.lua - Install lazy.nvim Plugin Manager
--- │   │   └── options.lua - NeoVim General Config
+-- │   │   ├── defaults.lua - NeoVim General Config
+-- │   │   └── keybinds.lua - Keymap Config for NeoVim
 -- │   └── plugins
 -- │       └── <plugin>.lua
 -- ├── init.lua
 -- └── lazy-lock.json
 
-require("config.lazy")
-require("config.options")
-require("config.keymaps")
+require("core.lazy")
+require("core.defaults")
+require("core.keybinds")
 
 -- [[ Configure plugins ]]
 -- See https://github.com/folke/lazy.nvim?tab=readme-ov-file#-structuring-your-plugins
