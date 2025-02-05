@@ -148,6 +148,9 @@ return {
     lspconfig.graphql.setup({})
 
     -- Ruby
+    -- local ruby_version = vim.fn.system('ruby -v')
+    -- local ruby_version = vim.fn.system('rbenv version-name')
+
     lspconfig.ruby_lsp.setup({
       capabilities = capabilities,
       cmd = { vim.fn.expand("~/.rbenv/versions/3.2.2/bin/ruby-lsp") },
@@ -160,15 +163,6 @@ return {
     -- Rubocop
     lspconfig.rubocop.setup({
       cmd = { vim.fn.expand("~/.rbenv/versions/3.2.2/bin/rubocop"), "--lsp" },
-      on_attach = function(_, bufnr)
-        -- Format the code on buffer write
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.buf.format()
-          end,
-        })
-      end
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
