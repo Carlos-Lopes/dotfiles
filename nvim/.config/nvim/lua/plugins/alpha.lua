@@ -4,7 +4,6 @@ return {
   event = "VimEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "echasnovski/mini.icons",
     "nvim-lua/plenary.nvim",
   },
   config = function()
@@ -37,7 +36,7 @@ return {
       dashboard.button("e", " New File", ":ene <BAR> startinsert <CR>"),
       dashboard.button("r", " Recent Files", ":Telescope oldfiles<CR>"),
       dashboard.button("f", " Search File", ":Telescope find_files<CR>"),
-      dashboard.button("g", "󰱼 Search Word", ":Telescope live_grep<CR>"),
+      dashboard.button("w", "󰱼 Search Word", ":Telescope live_grep<CR>"),
       dashboard.button("l", "󰒲 Extensions", ":Lazy<CR>"),
       dashboard.button("q", " Quit", ":q<CR>"),
     }
