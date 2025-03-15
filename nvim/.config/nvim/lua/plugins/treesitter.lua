@@ -82,9 +82,5 @@ return {
       zindex = 20,     -- The Z-index of the context window
       on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
     })
-
-    -- Tree-sitter based folding (implemented in Neovim itself, see :h vim.treesitter.foldexpr()).
-    -- vim.wo.foldmethod = 'expr'
-    -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
   end,
 }

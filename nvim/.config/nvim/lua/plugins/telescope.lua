@@ -15,11 +15,7 @@ return {
       end,
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    -- Useful for getting pretty icons, but requires a Nerd Font.
-    {
-      'nvim-tree/nvim-web-devicons',
-      enabled = vim.g.have_nerd_font
-    },
+    { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
   },
   config = function()
     local builtin = require("telescope.builtin")
@@ -48,24 +44,23 @@ return {
     require("telescope").load_extension("ui-select")
 
     local function current_buffer_fuzzy_find()
-      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
         winblend = 10,
         previewer = false,
-      })
+      }))
+    end
+
+    local nmap = function(keys, func, desc)
+      vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
     end
 
     -- See `:help telescope.builtin`
-    vim.keymap.set("n", "<leader>/", current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer" })
-    vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-    vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-    vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-    vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-    vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-    vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-    vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-    vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-    vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-    vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-    vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch Current [W]ord" })
+    nmap("<leader>/", current_buffer_fuzzy_find, "[/] Fuzzily search in current buffer")
+    nmap("<leader><leader>", builtin.buffers, "[ ] Find existing buffers")
+    nmap("<leader><space>", builtin.buffers, "[ ] Find existing buffers")
+    nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
+    nmap("<leader>sf", builtin.find_files, "[S]earch [F]iles")
+    nmap("<leader>sg", builtin.live_grep, "[S]earch by [G]rep")
+    nmap("<leader>sw", builtin.grep_string, "[S]earch Current [W]ord")
   end,
 }
