@@ -42,5 +42,7 @@ return {
     }
 
     alpha.setup(dashboard.opts)
+
+    vim.keymap.set("n", "<leader>ee", ':Alpha<CR>', { desc = "Open Greeter Window (Alpha)" })
   end,
 }
