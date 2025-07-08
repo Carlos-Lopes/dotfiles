@@ -14,10 +14,9 @@ lspconfig.ruby_lsp.setup({
   },
 })
 
---     vim.api.nvim_create_autocmd("BufEnter", {
---       pattern = { 'Fastfile', 'Appfile', 'Matchfile', 'Pluginfile', 'Podfile' },
---       callback = function()
---         vim.o.filetype = "ruby"
---       end,
---     })
-
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { 'Fastfile', 'Appfile', 'Matchfile', 'Pluginfile', 'Podfile' },
+  callback = function()
+    vim.o.filetype = "ruby"
+  end,
+})

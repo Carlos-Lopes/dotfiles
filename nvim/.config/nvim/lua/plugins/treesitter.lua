@@ -12,6 +12,8 @@ return {
     require("nvim-treesitter.install").prefer_git = true
 
     require("nvim-treesitter.configs").setup({
+      modules = {},
+      ignore_install = {},
       auto_install = true,
       ensure_installed = {
         "bash",
@@ -20,7 +22,6 @@ return {
         "cpp",
         "dart",
         "diff",
-        "dockerfile",
         "go",
         "graphql",
         "groovy",
