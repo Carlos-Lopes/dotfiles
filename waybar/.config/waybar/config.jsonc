@@ -1,0 +1,119 @@
+{
+  "layer": "top",
+  "position": "top",
+  "output": "eDP-1",
+  "height": 30,
+  "margin": 0,
+  "spacing": 4,
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "temperature",
+    "battery",
+    "network",
+    "clock"
+  ],
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "clock": {
+    "format": " {:%H:%M}",
+    "interval": 60,
+    "timezone": "America/Sao_Paulo",
+    "tooltip-format": "<span>{calendar}</span>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "today": "<span color='#ff6699'><b>{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "months": "<span color='#ffead3'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "hyprland/workspaces": {
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{name}: {icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "🗒️"
+    },
+    "persistent-workspaces": {
+      "*": 3
+    },
+    "on-click": "activate"
+  },
+  "hyprland/window": {
+    "max-length": 40,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*)Spotify": "Spotify",
+      "(.*)Steam": "Steam",
+      "(.*)Google Chrome": "Google Chrome",
+      "(.*)Github": "Github"
+    }
+  },
+  "network": {
+    "format-disconnected": "⚠ Disconnected",
+    "format-ethernet": "  Wired",
+    "format-wifi": "  {essid}",
+    "interval": 15,
+    "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+    "tooltip-format-disconnected": "Disconnected"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "format-muted": "",
+    "scroll-step": 5,
+    "tooltip-format": "{icon} {desc} // {volume}%",
+    "on-click": "pavucontrol -t 3",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+  },
+  "temperature": {
+    "thermal-zone": 4,
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C"
+  }
+}

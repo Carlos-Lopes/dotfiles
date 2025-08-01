@@ -1,0 +1,54 @@
+/* style.css */
+
+@import "theme.css";
+
+* {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+}
+
+window#waybar {
+  border: 0px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#backlight,
+#battery,
+#clock,
+#cpu,
+#disk,
+#idle_inhibitor,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray,
+#window,
+#workspaces {
+  background-color: @mauve;
+  border-radius: 4px;
+  border-style: solid;
+  color: @base;
+  margin: 2px;
+  opacity: 1;
+  padding: 0px 8px;
+}
+
+#workspaces button:hover {
+  background: none;
+  border: 0px;
+  box-shadow: none;
+  color: @mauve;
+  text-shadow: none;
+}
+
+#workspaces button:hover * {
+  color: @mauve;
+  border-color: @mauve;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+

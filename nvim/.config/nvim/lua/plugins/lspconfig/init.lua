@@ -13,6 +13,7 @@ return {
   },
   config = function()
     require("plugins.lspconfig.configs.bashls")
+    require("plugins.lspconfig.configs.cssls")
     require("plugins.lspconfig.configs.eslint")
     require("plugins.lspconfig.configs.graphql")
     require("plugins.lspconfig.configs.jsonls")
