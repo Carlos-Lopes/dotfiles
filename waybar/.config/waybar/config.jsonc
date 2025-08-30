@@ -1,0 +1,102 @@
+{
+  "layer": "top",
+  "position": "top",
+  "autohide": true,
+  "autohide-blocked": false,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "modules-left": [
+    "custom/archicon",
+    "clock",
+    "cpu",
+    "memory",
+    "disk",
+    "temperature"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "wlr/taskbar",
+    "idle_inhibitor",
+    "network"
+  ],
+  "custom/archicon": {
+    "format": "",
+    "on-click": "rofi -show drun",
+    "tooltip": false
+  },
+  "clock": {
+    "interval": 60,
+    "timezone": "America/Sao_Paulo",
+    "format": "{:%I:%M}",
+    "tooltip": true,
+    "tooltip-format": "{:%A %d-%m-%Y}"
+  },
+  "cpu": {
+    "format": "{usage}% ",
+    "tooltip": true,
+    "tooltip-format": "Uso de CPU: {usage}%\nNúcleos: {cores}"
+  },
+  "memory": {
+    "format": "{}% 󰍛",
+    "tooltip": true,
+    "tooltip-format": "Uso de RAM: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)"
+  },
+  "disk": {
+    "format": "{percentage_used}% ",
+    "tooltip": true,
+    "tooltip-format": "Disco Livre: {free} / {total} ({percentage_free}%)"
+  },
+  "temperature": {
+    "format": "{temperatureC}°C {icon}",
+    "tooltip": false,
+    "format-icons": [
+      ""
+    ]
+  },
+  /* === Modules Center === */
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "active": ""
+    },
+    "persistent-workspaces": {
+      "*": 2
+    },
+    "disable-scroll": true,
+    "all-outputs": true,
+    "show-special": true
+  },
+  /* === Modules Right === */
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "all-outputs": true,
+    "active-first": true,
+    "tooltip-format": "{name}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+      "rofi"
+    ]
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname} 󰈀",
+    "format-disconnected": " ",
+    "tooltip-format": " {ifname} via {gwaddr}",
+    "tooltip-format-ethernet": " {ifname} {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 28
+  }
+}
