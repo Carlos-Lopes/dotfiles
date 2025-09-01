@@ -13,7 +13,9 @@ sudo pacman -S --noconfirm --needed \
   git \
   hypridle \
   hyprland \
+  hyprland-qtutils \
   hyprlock \
+  hyprpicker \
   imv \
   inetutils \
   intel-ucode \
@@ -23,6 +25,10 @@ sudo pacman -S --noconfirm --needed \
   luarocks \
   mako \
   man \
+  nemo \
+  nemo-fileroller \
+  nemo-preview \
+  nemo-share \
   nerd-fonts \
   net-tools \
   networkmanager \
@@ -31,6 +37,8 @@ sudo pacman -S --noconfirm --needed \
   openssh \
   pipewire \
   playerctl \
+  qt5-wayland \
+  qt6-wayland \
   reflector \
   ripgrep \
   rofi \
@@ -41,6 +49,7 @@ sudo pacman -S --noconfirm --needed \
   unzip \
   uwsm \
   vim \
+  xdg-desktop-portal-hyprland \
   waybar \
   wget \
   wireplumber \

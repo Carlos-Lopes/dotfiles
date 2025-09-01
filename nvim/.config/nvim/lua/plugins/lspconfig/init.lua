@@ -16,6 +16,8 @@ return {
     require("plugins.lspconfig.configs.eslint")
     require("plugins.lspconfig.configs.graphql")
     require("plugins.lspconfig.configs.jsonls")
+    require("plugins.lspconfig.configs.html")
+    require("plugins.lspconfig.configs.hyprls")
     require("plugins.lspconfig.configs.lua_ls")
     require("plugins.lspconfig.configs.rubocop")
     require("plugins.lspconfig.configs.ruby_lsp")
