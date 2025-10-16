@@ -68,10 +68,10 @@ listbox {
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
-    spacing:                     10px;
-    padding:                     100px 60px;
+    spacing:                     8px;
+    padding:                     20px 20px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/bg.png", width);
+    background-image:            url("~/.config/rofi/gray0_ctp_on_line.png", both);
     text-color:                  @foreground;
     orientation:                 horizontal;
     children:                    [ "textbox-prompt-colon", "entry", "dummy", "mode-switcher" ];
@@ -86,16 +86,18 @@ textbox-prompt-colon {
     text-color:                  inherit;
 }
 entry {
+    background-color:            transparent;
+    border:                      1px;
+    border-color:                rgba(255, 255, 255, 0.5);
+    border-radius:               12px;
+    cursor:                      text;
     enabled:                     true;
     expand:                      false;
-    width:                       150px;
     padding:                     12px 16px;
-    border-radius:               12px;
-    background-color:            @background-alt;
-    text-color:                  inherit;
-    cursor:                      text;
-    placeholder:                 "Search";
     placeholder-color:           inherit;
+    placeholder:                 "Search";
+    text-color:                  inherit;
+    width:                       240px;
 }
 dummy {
     expand:                      true;
@@ -152,6 +154,10 @@ element {
     cursor:                      pointer;
 }
 element normal.normal {
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+element alternate.normal {
     background-color:            inherit;
     text-color:                  inherit;
 }

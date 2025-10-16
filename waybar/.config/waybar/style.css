@@ -1,9 +1,9 @@
 /* -- Global rules -- */
 * {
   border: none;
-  font-family: "Jetbrains Mono";
-  font-size: 15px;
-  min-height: 10px;
+  font-family: "Jetbrains Mono NF";
+  font-size: 16px;
+  min-height: 8px;
 }
 
 window#waybar {
@@ -24,39 +24,43 @@ window#waybar.hidden {
 #idle_inhibitor,
 #network {
   color: #161320;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
   transition: none;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.25);
+  border-width: 1px;
+
 }
 
 /* Separation to the left */
 #custom-archicon,
 #cpu,
 #idle_inhibitor {
-  margin-left: 5px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  margin-left: 4px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 /* Separation to the rigth */
 #clock,
 #temperature,
 #network {
-  margin-right: 5px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  margin-right: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /* -- Specific styles -- */
 
 /* Modules left */
 #custom-archicon {
-  font-size: 20px;
+  font-size: 16px;
   color: #89B4FA;
   background: #161320;
-  padding-right: 17px;
+  padding-right: 16px;
 }
 
 #clock {
@@ -82,15 +86,15 @@ window#waybar.hidden {
 /* Modules center */
 #workspaces {
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  margin: 6px 5px;
-  padding: 0px 6px;
+  border-radius: 8px;
+  /* margin: 4px 4px; */
+  /* padding: 0px 4px; */
 }
 
 #workspaces button {
   color: #B5E8E0;
   background: transparent;
-  padding: 4px 4px;
+  /* padding: 4px 4px; */
   transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -112,15 +116,15 @@ window#waybar.hidden {
 /* Modules right */
 #taskbar {
   background: transparent;
-  border-radius: 10px;
-  padding: 0px 5px;
-  margin: 6px 5px;
+  border-radius: 8px;
+  /* padding: 0px 4px; */
+  /* margin: 6px 4px; */
 }
 
 #taskbar button {
-  padding: 0px 5px;
-  margin: 0px 3px;
-  border-radius: 6px;
+  padding: 0px 4px;
+  margin: 0px 4px;
+  border-radius: 4px;
   transition: background 0.3s ease;
 }
 
@@ -144,8 +148,8 @@ window#waybar.hidden {
 
 /* === Optional animation === */
 @keyframes blink {
-  to {
-    background-color: #BF616A;
-    color: #B5E8E0;
-  }
+to {
+  background-color: #BF616A;
+  color: #B5E8E0;
+}
 }

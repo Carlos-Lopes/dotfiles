@@ -15,6 +15,7 @@ sudo pacman -S --noconfirm --needed \
   hyprland \
   hyprland-qtutils \
   hyprlock \
+  hyprpaper \
   hyprpicker \
   imv \
   inetutils \
@@ -43,6 +44,7 @@ sudo pacman -S --noconfirm --needed \
   ripgrep \
   rofi \
   rsync \
+  sddm \
   stow \
   tree-sitter-cli \
   ttf-jetbrains-mono \
