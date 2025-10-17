@@ -1,11 +1,6 @@
 {
   "layer": "top",
   "position": "top",
-  "autohide": true,
-  "autohide-blocked": false,
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
   "modules-left": [
     "custom/archicon",
     "clock",
@@ -20,8 +15,20 @@
   "modules-right": [
     "wlr/taskbar",
     "idle_inhibitor",
-    "network"
+    "pulseaudio",
+    "network",
+    "battery"
   ],
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
   "custom/archicon": {
     "format": "",
     "on-click": "rofi -show drun",
@@ -99,5 +106,28 @@
     "tooltip-format-ethernet": " {ifname} {ipaddr}/{cidr}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 28
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
   }
 }
