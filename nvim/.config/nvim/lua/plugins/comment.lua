@@ -1,7 +1,7 @@
 return {
-  'numToStr/Comment.nvim',
+  "numToStr/Comment.nvim",
   opts = {
     -- ignores empty lines
-    ignore = '^$'
+    ignore = "^$",
   },
 }

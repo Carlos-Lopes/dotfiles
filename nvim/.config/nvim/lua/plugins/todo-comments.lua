@@ -6,8 +6,8 @@ return {
     "nvim-telescope/telescope.nvim",
   },
   config = function()
-    require('todo-comments').setup({})
+    require("todo-comments").setup({})
 
-    vim.keymap.set("n", "<C-t>", ":TodoTelescope<CR>", { desc = "Open [T]odo Window" })
-  end
+    vim.keymap.set("n", "<C-t>", ":TodoTelescope<CR>", { desc = "Open Todo Window" })
+  end,
 }

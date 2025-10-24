@@ -1,10 +1,10 @@
-vim.keymap.set("n", "<leader>ex", vim.cmd.Ex, { desc = "Open Command Line Window" })
+local function nmap(keys, func, desc)
+  vim.keymap.set("n", keys, func, { desc = desc })
+end
 
--- Clear search highlight on pressing <Esc> in normal mode
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
-vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { desc = "Show [D]iagnostic [E]rror" })
-
--- Increment/Decrement numbers
-vim.keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" })
-vim.keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
+nmap("<leader><Esc>", "<cmd>nohlsearch<CR>", "Clear Search Highlight")
+nmap("<Esc>", "<cmd>nohlsearch<CR>", "Clear Search Highlight")
+nmap("<leader>+", "<C-a>", "Increment Number")
+nmap("<leader>-", "<C-x>", "Decrement Number")
+nmap("<leader>de", vim.diagnostic.open_float, "Show Diagnostic Error")
+nmap("<leader>ex", vim.cmd.Ex, "Open Command Line Window")

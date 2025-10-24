@@ -1,1 +1,5 @@
-vim.lsp.enable('sourcekit')
+vim.lsp.config('sourcekit', {
+  --
+})
+
+-- vim.lsp.enable('sourcekit')

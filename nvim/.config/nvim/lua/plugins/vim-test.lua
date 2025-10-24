@@ -1,14 +1,26 @@
 return {
   "vim-test/vim-test",
   dependencies = {
-    "preservim/vimux"
+    "preservim/vimux",
   },
   config = function()
-    vim.keymap.set("n", "<leader>Tn", ":TestNearest<CR>", { desc = '[T]est [N]earest' })
-    vim.keymap.set("n", "<leader>Tf", ":TestFile<CR>", { desc = '[T]est [F]ile' })
-    vim.keymap.set("n", "<leader>Ts", ":TestSuite<CR>", { desc = '[T]est [S]uite' })
-    vim.keymap.set("n", "<leader>Tl", ":TestLast<CR>", { desc = '[T]est [L]ast' })
-    vim.keymap.set("n", "<leader>Tv", ":TestVisit<CR>", { desc = '[T]est [V]isit' })
-    vim.cmd("let test#strategy = 'neovim'")
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local function nmap(keys, func, desc)
+      vim.keymap.set("n", keys, func, {
+        noremap = true,
+        silent = true,
+        desc = "[Test]: " .. desc,
+      })
+    end
+
+    nmap("<leader>Tf", "<cmd>TestFile<CR>", "Test File")
+    nmap("<leader>Tl", "<cmd>TestLast<CR>", "Test Last")
+    nmap("<leader>Tn", "<cmd>TestNearest<CR>", "Test Nearest")
+    nmap("<leader>Ts", "<cmd>TestSuite<CR>", "Test Suite")
+    nmap("<leader>Tv", "<cmd>TestVisit<CR>", "Test Visit")
+
+    local strategy = os.getenv("TMUX") and "vimux" or "neovim"
+    vim.cmd("let test#strategy = '" .. strategy .. "'")
   end,
 }

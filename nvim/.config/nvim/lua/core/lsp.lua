@@ -1,46 +1,59 @@
-local keymap = vim.keymap
-local severity = vim.diagnostic.severity
-local telescope = require("telescope.builtin")
+local builtin = require("telescope.builtin")
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp-attach", {}),
-  callback = function(event)
+  group = vim.api.nvim_create_augroup("LspAttachGroup", {}),
+  callback = function(ev)
+    local bufnr = ev.buf
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf, silent = true }
+    local function nmap(keys, func, desc)
+      local opts = {
+        buffer = bufnr,
+        noremap = true,
+        silent = true,
+        desc = "[LSP]: " .. desc,
+      }
+
+      vim.keymap.set("n", keys, func, opts)
+    end
 
     -- Keymaps
     -- LSP Actions
-    keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "LSP: Code Action" }))
-    keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "LSP: Rename Symbol" }))
+    nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    nmap("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
 
     -- LSP Navigation
-    keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "LSP: Go to Declaration" }))
-    keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "LSP: Go to Definition" }))
-    keymap.set("n", "gR", telescope.lsp_references, vim.tbl_extend("force", opts, { desc = "LSP: References" }))
-    keymap.set("n", "gi", telescope.lsp_implementations, vim.tbl_extend("force", opts, { desc = "LSP: Implementations" }))
-    keymap.set("n", "gt", telescope.lsp_type_definitions, vim.tbl_extend("force", opts, { desc = "LSP: Type Definitions" }))
+    nmap("gD", vim.lsp.buf.declaration, "Open Declaration")
+    nmap("gd", vim.lsp.buf.definition, "Open Definition")
+    nmap("gR", builtin.lsp_references, "References")
+    nmap("gi", builtin.lsp_implementations, "Implementations")
+    nmap("gt", builtin.lsp_type_definitions, "Type Definitions")
 
     -- Symbols
-    keymap.set("n", "<leader>ds", telescope.lsp_document_symbols, vim.tbl_extend("force", opts, { desc = "LSP: Document Symbols" }))
+    nmap("<leader>ds", builtin.lsp_document_symbols, "Document Symbols")
 
     -- Diagnostics
-    keymap.set("n", "<leader>D", function()
-      telescope.diagnostics({ bufnr = 0 })
-    end, vim.tbl_extend("force", opts, { desc = "LSP: Buffer Diagnostics" }))
-    keymap.set("n", "<leader>d", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "LSP: Line Diagnostics" }))
+    nmap("<leader>D", function()
+      builtin.diagnostics({ bufnr = 0 })
+    end, "Buffer Diagnostics")
+    nmap("<leader>d", vim.diagnostic.open_float, "Line Diagnostics")
+
+    if not client or not client.server_capabilities then
+      return
+    end
 
     -- Toggle Inlay Hints (if supported)
-    if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-      keymap.set("n", "<leader>th", function()
-        local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
-        vim.lsp.inlay_hint.enable(not enabled, { bufnr = 0 })
-      end, vim.tbl_extend("force", opts, { desc = "LSP: Toggle Inlay Hints" }))
+    if client.server_capabilities.inlayHintProvider then
+      nmap("<leader>th", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end, "Toggle Inlay Hints")
     end
 
     -- Highlight references of the word under the cursor when it rests there for a little while.
     if client.server_capabilities.documentHighlightProvider then
-      local group = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+      local group = vim.api.nvim_create_augroup("LspHighlightGroup", { clear = false })
 
       vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         group = group,
@@ -55,10 +68,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
 
       vim.api.nvim_create_autocmd("LspDetach", {
-        group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-        callback = function(ev)
+        group = vim.api.nvim_create_augroup("LspDetachGroup", { clear = true }),
+        callback = function()
           vim.lsp.buf.clear_references()
-          vim.api.nvim_clear_autocmds({ group = group, buffer = ev.buf })
+          vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
         end,
       })
     end
@@ -66,18 +79,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Create a command `:Format` local to the LSP buffer
     if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-        vim.lsp.buf.format()
+        vim.lsp.buf.format({ async = true })
       end, { desc = "LSP: Format current buffer" })
     end
   end,
 })
 
--- options for vim.diagnostic.config()
----@type vim.diagnostic.Opts
 vim.diagnostic.config({
   float = {
     border = "rounded",
-    source = "always",
+    source = true,
     focusable = false,
   },
   underline = true,
@@ -90,11 +101,10 @@ vim.diagnostic.config({
   severity_sort = true,
   signs = {
     text = {
-      [severity.ERROR] = " ",
-      [severity.WARN]  = " ",
-      [severity.HINT]  = "󰠠 ",
-      [severity.INFO]  = " ",
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.HINT] = "󰠠 ",
     },
   }
 })
-

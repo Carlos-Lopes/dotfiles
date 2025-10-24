@@ -3,25 +3,19 @@ return {
   lazy = false,
   name = "catppuccin",
   priority = 1000,
-  config = function()
-    require("catppuccin").setup({
-      default_integrations = false,
-      integrations = {
-        alpha = true,
-        cmp = true,
-        gitsigns = true,
-        mini = {
-          enabled = false
-        },
-        telescope = {
-          enabled = true,
-        },
-        treesitter = true,
-        treesitter_context = true,
-        which_key = true
-      }
-    })
+  opts = {
+    flavour = "mocha",
+    dim_inactive = {
+      enabled = true,
+      shade = "dark",
+      percentage = 0.15,
+    },
+    default_integrations = false,
+    auto_integrations = true,
+  },
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
 
     vim.cmd.colorscheme("catppuccin-mocha")
-  end
+  end,
 }
