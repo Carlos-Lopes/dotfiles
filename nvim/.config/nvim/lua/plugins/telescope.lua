@@ -1,6 +1,5 @@
 return {
   'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -14,8 +13,9 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+    'nvim-telescope/telescope-ui-select.nvim',
+    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    "folke/todo-comments.nvim",
   },
   config = function()
     local builtin = require("telescope.builtin")
@@ -50,17 +50,15 @@ return {
       }))
     end
 
-    local nmap = function(keys, func, desc)
-      vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
-    end
+    local opts = { buffer = bufnr }
 
     -- See `:help telescope.builtin`
-    nmap("<leader>/", current_buffer_fuzzy_find, "[/] Fuzzily search in current buffer")
-    nmap("<leader><leader>", builtin.buffers, "[ ] Find existing buffers")
-    nmap("<leader><space>", builtin.buffers, "[ ] Find existing buffers")
-    nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
-    nmap("<leader>sf", builtin.find_files, "[S]earch [F]iles")
-    nmap("<leader>sg", builtin.live_grep, "[S]earch by [G]rep")
-    nmap("<leader>sw", builtin.grep_string, "[S]earch Current [W]ord")
+    vim.keymap.set("n", "<leader>/", current_buffer_fuzzy_find, vim.tbl_extend("force", opts, { desc = "[/] Fuzzily search in current buffer" }))
+    vim.keymap.set("n", "<leader><leader>", builtin.buffers, vim.tbl_extend("force", opts, { desc = "[ ] Find existing buffers" }))
+    vim.keymap.set("n", "<leader><space>", builtin.buffers, vim.tbl_extend("force", opts, { desc = "[ ] Find existing buffers" }))
+    vim.keymap.set("n", "<leader>sd", builtin.diagnostics, vim.tbl_extend("force", opts, { desc = "[S]earch [D]iagnostics" }))
+    vim.keymap.set("n", "<leader>sf", builtin.find_files, vim.tbl_extend("force", opts, { desc = "[S]earch [F]iles" }))
+    vim.keymap.set("n", "<leader>sg", builtin.live_grep, vim.tbl_extend("force", opts, { desc = "[S]earch by [G]rep" }))
+    vim.keymap.set("n", "<leader>sw", builtin.grep_string, vim.tbl_extend("force", opts, { desc = "[S]earch Current [W]ord" }))
   end,
 }

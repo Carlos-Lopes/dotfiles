@@ -1,26 +1,22 @@
--- Git Decorations
--- https://github.com/lewis6991/gitsigns.nvim
 return {
   'lewis6991/gitsigns.nvim',
-  config = function()
-    require('gitsigns').setup({
-      current_line_blame = true,
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-      on_attach = function(bufnr)
-        local gitsigns = require('gitsigns')
+  event = { "BufReadPre", "BufNewFile" },
+  opts = {
+    current_line_blame = true,
+    signs = {
+      add          = { text = '+' },
+      change       = { text = '~' },
+      delete       = { text = '_' },
+      topdelete    = { text = '‾' },
+      changedelete = { text = '~' },
+    },
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
 
-        local nmap = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = bufnr, desc = desc })
-        end
+      local opts = { buffer = bufnr, desc = "" }
 
-        nmap("<leader>tb", gitsigns.toggle_current_line_blame, "[T]oggle Git [B]lame")
-      end
-    })
-  end
+      vim.keymap.set("n", "<leader>tb", gs.toggle_current_line_blame, { buffer = bufnr, desc = "Toggle Git line blame" })
+      vim.keymap.set("n", "<leader>td", gs.toggle_deleted, { buffer = bufnr, desc = "Toggle deleted lines" })
+    end,
+  },
 }
